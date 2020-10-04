@@ -2,7 +2,7 @@
 
 import fetch from "node-fetch"
 
-const wakeUpDyno = (url: string, interval = 25, callback: () => void) => {
+const wakeUpDyno = (url: string, interval = 25, callback?: () => void) => {
   const milliseconds = interval * 60000
   setTimeout(() => {
     try {

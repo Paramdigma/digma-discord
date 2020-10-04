@@ -10,12 +10,14 @@ import {
   handleMentionCommand,
   handleEmbedCommand
 } from "./commands"
+import wakeUpDyno from "./wokeDyno"
 
 const DYNO_URL = "https://digma-discord.herokuapp.com" // the url of your dyno
 const client = new Discord.Client()
 
 client.once("ready", () => {
   console.log("Ready!")
+  wakeUpDyno(DYNO_URL) // Keep heroku alive
 })
 
 client.on("message", message => {
