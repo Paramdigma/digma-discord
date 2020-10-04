@@ -1,34 +1,18 @@
-import Discord from "discord.js"
 import config from "./config"
-import {
-  CMNDS,
-  MENTION,
-  handlePingCommand,
-  handlePongCommand,
-  handleServerCommand,
-  handleUserCommand,
-  handleMentionCommand,
-  handleEmbedCommand
-} from "./commands"
 import wakeUpDyno from "./wokeDyno"
+import express from "express"
+import { client } from "./client"
 
+const app = express()
+const port = process.env.PORT || 3000
 const DYNO_URL = "https://digma-discord.herokuapp.com" // the url of your dyno
-const client = new Discord.Client()
 
-client.once("ready", () => {
-  console.log("Ready!")
+app.get("/", (req, res) => {
+  res.send("This is the Digma Discord Bot server. You should not be here!")
+})
+
+app.listen(port, () => {
+  console.log(`Discord bot server listening on http://localhost:${port}`)
   wakeUpDyno(DYNO_URL) // Keep heroku alive
+  client.login(config.token)
 })
-
-client.on("message", message => {
-  console.log(message.content)
-  if (message.content.startsWith(CMNDS.ping)) handlePingCommand(message)
-  else if (message.content.startsWith(CMNDS.pong)) handlePongCommand(message)
-  else if (message.content.startsWith(CMNDS.user)) handleUserCommand(message)
-  else if (MENTION.test(message.content)) handleMentionCommand(message)
-  else if (message.content === CMNDS.embed) handleEmbedCommand(message)
-  else if (message.content.startsWith(CMNDS.server))
-    handleServerCommand(message)
-})
-
-client.login(config.token)
