@@ -3,6 +3,15 @@ import wakeUpDyno from "./wokeDyno"
 import express from "express"
 import { client } from "./client"
 
+function turnoff(signal): void {
+  client.destroy()
+}
+
+process
+  .on("SIGTERM", signal => client.destroy())
+  .on("SIGINT", signal => client.destroy())
+  .on("uncaughtException", signal => client.destroy())
+
 const app = express()
 const port = process.env.PORT || 3000
 const DYNO_URL = "https://digma-discord.herokuapp.com" // the url of your dyno
