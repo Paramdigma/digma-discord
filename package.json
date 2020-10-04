@@ -1,0 +1,22 @@
+{
+    "name": "digma-discord",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/index.js",
+    "scripts": {
+        "build:watch": "tsc --watch",
+        "build": "tsc",
+        "start": "node ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "discord.js": "^12.3.1",
+        "node-fetch": "^2.6.1"
+    },
+    "devDependencies": {
+        "@types/node": "^14.11.2",
+        "@types/node-fetch": "^2.5.7"
+    }
+}
